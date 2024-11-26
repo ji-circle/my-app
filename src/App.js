@@ -12,36 +12,24 @@ import reaidngpic from './reading.jpg'
 function App() {
   const [time, setTime] = useState(new Date().toLocaleTimeString());
   const [visitCount, setVisitCount] = useState(0);
-  const isEffectExecuted = useRef(false); //중복 실행 방지 플래그
+  const hasUpdatedVisitCount = useRef(false); //중복 실행 방지 플래그
 
   useEffect(() => {
-    if (isEffectExecuted.current) return;//이미 실행된 경우 실행 안함
-    isEffectExecuted.current = true;
-
     // Update time every second
     const timer = setInterval(() => {
       setTime(new Date().toLocaleTimeString());
     }, 1000);
+    return () => clearInterval(timer); // 컴포넌트 언마운트 시 타이머 해제
+  }, []);
 
-    // // Initialize visit count (only once)
-    // const count = localStorage.getItem('visitCount') || 0;
-    // if (!localStorage.getItem('visitInitialized')) {
-    //   const newCount = parseInt(count, 10) + 1;
-    //   localStorage.setItem('visitCount', newCount);
-    //   localStorage.setItem('visitInitialized', 'true');
-    //   setVisitCount(newCount);
-    // } else {
-    //   setVisitCount(parseInt(count, 10));
-    // }
-
-    // return () => clearInterval(timer);
+  useEffect(() => {
+    if (hasUpdatedVisitCount.current) return; //이미 실행된 경우 실행 안하게
+    hasUpdatedVisitCount.current = true;
 
     const count = parseInt(localStorage.getItem('visitCount') || '0', 10);
     const newCount = count + 1;
     localStorage.setItem('visitCount', newCount);
     setVisitCount(newCount);
-
-    return () => clearInterval(timer);
   }, []);
 
 
