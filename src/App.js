@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import MyInfo from './components/MyInfo';
 import CC from './components/ClickCounter';
+import CurrentTime from './components/CurrentTime';
 
 // import mypic from './KakaoTalk_20240721_180926578_06.jpg'
 import travelpic from './travel.jpg'
@@ -10,17 +11,17 @@ import runningpic from './running.jpg'
 import reaidngpic from './reading.jpg'
 
 function App() {
-  const [time, setTime] = useState(new Date().toLocaleTimeString());
+  // const [time, setTime] = useState(new Date().toLocaleTimeString());
   const [visitCount, setVisitCount] = useState(0);
   const hasUpdatedVisitCount = useRef(false); //중복 실행 방지 플래그
 
-  useEffect(() => {
-    // Update time every second
-    const timer = setInterval(() => {
-      setTime(new Date().toLocaleTimeString());
-    }, 1000);
-    return () => clearInterval(timer); // 컴포넌트 언마운트 시 타이머 해제
-  }, []);
+  // useEffect(() => {
+  //   // Update time every second
+  //   const timer = setInterval(() => {
+  //     setTime(new Date().toLocaleTimeString());
+  //   }, 1000);
+  //   return () => clearInterval(timer); // 컴포넌트 언마운트 시 타이머 해제
+  // }, []);
 
   useEffect(() => {
     if (hasUpdatedVisitCount.current) return; //이미 실행된 경우 실행 안하게
@@ -36,9 +37,12 @@ function App() {
   return (
     <div className="App">
       <div className="top-right">
-        <span className="time">
+        {/* <span className="time">
           {time}
-        </span>
+        </span> */}
+        <div>
+          <CurrentTime/>
+        </div>
       </div>
       <div className="center">
         {/* <h1>최지원</h1>
