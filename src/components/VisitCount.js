@@ -14,13 +14,6 @@ function VisitCount() {
         }
     }, []);
 
-    // useEffect(() => {
-    //     const storedCount = localStorage.getItem('visitCount');
-    //     const newCount = storedCount ? parseInt(storedCount) + 1 : 1;
-    //     setVisitCount(newCount);
-    //     localStorage.setItem('visitCount', newCount);
-    // }, []);
-
     return <div className="visit-count">
         Total Visits: {visitCount}
     </div>;

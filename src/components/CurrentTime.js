@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 function CurrentTime() {
     const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
     useEffect(() => {
-        // Update time every second
         const timer = setInterval(() => {
           setCurrentTime(new Date().toLocaleTimeString());
         }, 1000);
